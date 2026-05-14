@@ -1,0 +1,41 @@
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./backend:/app
+      - ~/.aws:/root/.aws:ro
+    environment:
+      - AWS_DEFAULT_REGION=us-east-1
+      - PYTHONDONTWRITEBYTECODE=1
+      - PYTHONUNBUFFERED=1
+      - CORS_ORIGINS=http://localhost:3000
+      - DOCKER_ENV=true
+      - AWS_TIMEOUT=30
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+    restart: unless-stopped
+    networks:
+      - ghosted-network
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      # This URL is evaluated in the user's browser, not inside the container.
+      - REACT_APP_API_URL=http://localhost:8000
+      - DOCKER_ENV=true
+    depends_on:
+      - backend
+    networks:
+      - ghosted-network
+
+networks:
+  ghosted-network:
+    driver: bridge

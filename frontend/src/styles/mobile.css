@@ -1,0 +1,948 @@
+/* Base styles that apply to all screen sizes */
+html {
+  overflow-y: scroll; /* Force scrollbar to always be visible to prevent layout shifts */
+  overflow-x: hidden;
+  scrollbar-width: thin; /* For Firefox */
+  scrollbar-color: rgba(0, 255, 127, 0.3) #000; /* For Firefox */
+}
+
+body {
+  overflow-x: hidden;
+  margin-right: 0 !important; /* Prevent margin adjustments when scrollbar appears */
+}
+
+/* Custom scrollbar for WebKit browsers */
+::-webkit-scrollbar {
+  width: 10px;
+  background-color: #000;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 255, 127, 0.3);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: #000;
+}
+
+/* Minimized window styles */
+@media (min-width: 601px) and (max-width: 900px) {
+  .app, #root {
+    width: 100%;
+    max-width: 100vw;
+    box-sizing: border-box;
+    overflow-x: hidden;
+  }
+  
+  /* Ensure content is properly sized for minimized windows */
+  div[class*="TerminalContainer"],
+  div[class*="ConfigContainer"] {
+    width: 100% !important;
+    padding-left: 5% !important;
+    padding-right: 5% !important;
+    margin: 0 auto !important;
+    box-sizing: border-box !important;
+  }
+  
+  /* Adjust table layouts */
+  table, .MuiTable-root {
+    width: 100% !important;
+    table-layout: fixed !important;
+  }
+  
+  /* Fix button layouts */
+  .MuiButtonGroup-root,
+  .MuiButtonBase-root,
+  [class*="ActionButton"],
+  [class*="action-button"] {
+    margin: 2px !important;
+    padding: 4px 8px !important;
+  }
+  
+  /* Fix pencil icon specifically */
+  [title="Rename instance"] .MuiIconButton-root {
+    width: 24px !important;
+    height: 24px !important;
+    padding: 2px !important;
+    min-width: 24px !important;
+    min-height: 24px !important;
+    max-width: 24px !important;
+    max-height: 24px !important;
+    transform: none !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+  
+  [title="Rename instance"] .MuiSvgIcon-root {
+    width: 16px !important;
+    height: 16px !important;
+    font-size: 16px !important;
+    transform: none !important;
+  }
+  
+  /* Fix Sort by dropdown */
+  [class*="SortContainer"],
+  [class*="SortByContainer"] {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-end !important;
+    min-width: 180px !important;
+    max-width: 100% !important;
+    width: auto !important;
+    padding-right: 10px !important;
+  }
+  
+  /* Ensure the sort by text and dropdown are visible */
+  [class*="SortByLabel"],
+  .MuiFormControl-root,
+  .MuiSelect-select {
+    min-width: 80px !important;
+    max-width: 100% !important;
+    width: auto !important;
+    margin-left: 5px !important;
+    margin-right: 5px !important;
+    white-space: nowrap !important;
+  }
+  
+  /* Fix header section layout */
+  [class*="PageHeader"] {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    width: 100% !important;
+    margin-bottom: 16px !important;
+  }
+  
+  /* Make sort container more visible */
+  [class*="SortByContainer"] {
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    align-items: center !important;
+    justify-content: flex-end !important;
+    padding: 5px !important;
+    background-color: rgba(0, 0, 0, 0.2) !important;
+    border-radius: 4px !important;
+  }
+  
+  /* Ensure the sort by text is visible */
+  [class*="SortByContainer"] > span,
+  [class*="SortByLabel"] {
+    margin-right: 8px !important;
+    white-space: nowrap !important;
+    color: rgba(0, 255, 127, 0.9) !important;
+    font-weight: bold !important;
+  }
+  
+  /* Ensure text doesn't overflow */
+  .MuiTypography-root {
+    word-break: break-word;
+  }
+  
+  /* Fix deployments page layout */
+  .MuiPaper-root,
+  .MuiCard-root,
+  .MuiBox-root {
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+    overflow: hidden !important;
+  }
+  
+  /* Improve deployment cards layout */
+  [class*="deployment-card"],
+  [class*="DeploymentCard"] {
+    display: flex !important;
+    flex-direction: column !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+    margin-bottom: 16px !important;
+  }
+  
+  /* Fix instance name and ID display */
+  [class*="instance-name"],
+  [class*="instance-id"],
+  [class*="InstanceId"] {
+    width: 100% !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
+  }
+}
+
+/* Desktop-specific styles to prevent layout shifts */
+@media (min-width: 769px) {
+  .app, #root {
+    width: 100%;
+    max-width: 100vw;
+    box-sizing: border-box;
+    overflow-x: hidden;
+  }
+  
+  /* Ensure desktop layout doesn't shift */
+  div[class*="TerminalContainer"] {
+    padding-left: 15% !important;
+    padding-right: 15% !important;
+    margin: 0 auto !important;
+    box-sizing: border-box !important;
+  }
+}
+
+/* Mobile styles only apply on screens smaller than 600px */
+@media (max-width: 600px) {
+  /* Basic mobile setup */
+  html, body {
+    position: relative !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    touch-action: pan-y !important; /* Only allow vertical scrolling */
+    text-align: center !important;
+  }
+  
+  /* Force center all content */
+  body * {
+    text-align: center !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+
+  /* Prevent horizontal scrolling on all major containers */
+  #root, .app, div[class*="ConfigContainer"], div[class*="TerminalContainer"] {
+    overflow-x: hidden !important;
+    max-width: 100vw !important;
+    width: 100% !important;
+  }
+  
+  /* Fix container centering */
+  div[class*="ConfigContainer"] {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    padding: 0 10px !important;
+    margin: 0 auto !important;
+    box-sizing: border-box !important;
+    overflow-x: hidden !important;
+  }
+
+  /* Fix for the config section */
+  div[class*="ConfigSection"] {
+    width: 100% !important;
+    max-width: 100% !important;
+    padding: 20px !important;
+    box-sizing: border-box !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    overflow-x: hidden !important;
+  }
+
+  /* Force center alignment for all text elements */
+  div[class*="HeroSection"], 
+  div[class*="HeroContent"],
+  div[class*="WordmarkContainer"],
+  div[class*="ConfigSection"],
+  div[class*="HeroTitle"],
+  div[class*="HeroSubtitle"] {
+    text-align: center !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    left: 0 !important;
+    right: 0 !important;
+  }
+  /* Global mobile adjustments */
+  body {
+    font-size: 95%;
+  }
+  
+  /* ===== LANDING/CONFIG PAGE ===== */
+  
+  /* Logo adjustments */
+  img[alt="Ghosted Logo"] {
+    max-width: 100px !important;
+    height: auto !important;
+    display: block !important;
+    margin: 0 auto !important;
+    position: relative !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important; /* Perfect centering */
+  }
+  
+  /* Logo container centering */
+  div[class*="LogoImage"],
+  a[class*="LogoLink"] {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    width: 100% !important;
+    margin: 0 auto !important;
+    position: relative !important;
+    left: 0 !important;
+    right: 0 !important;
+  }
+  
+  /* Header centering */
+  div[class*="Header"] {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 100% !important;
+    margin: 0 auto !important;
+    padding: 0 !important;
+    position: relative !important;
+  }
+  
+  /* Config page adjustments */
+  div[style*="min-height: 100vh"] {
+    padding: 20px 0;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    text-align: center !important;
+  }
+  
+  /* Force center alignment for all hero content */
+  div[class*="HeroContent"] {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 100% !important;
+    text-align: center !important;
+  }
+  
+  /* Wordmark container adjustments */
+  div[class*="WordmarkContainer"] {
+    display: flex !important;
+    justify-content: center !important;
+    width: 100% !important;
+    text-align: center !important;
+    margin: 0 auto !important;
+    padding: 0 !important;
+    position: relative !important;
+    left: 0 !important;
+    right: 0 !important;
+    transform: translateX(0) !important; /* Force centered position */
+  }
+  
+  div[class*="WordmarkContainer"] span {
+    font-size: 48px !important;
+    margin: 0 4px !important;
+    text-align: center !important;
+    display: inline-block !important;
+  }
+  
+  /* Specific fix for the ghosted text */
+  span[style*="animation-delay"] {
+    display: inline-block !important;
+  }
+  
+  /* Extra centering for the tagline */
+  div[class*="HeroSection"] > p,
+  div[class*="HeroSection"] > div:last-child {
+    width: 100% !important;
+    text-align: center !important;
+    margin: 0 auto !important;
+    padding: 0 !important;
+    position: absolute !important;
+    left: 0 !important;
+    right: 0 !important;
+  }
+  
+  /* Title and subtitle adjustments */
+  div[class*="HeroTitle"] {
+    font-size: 24px !important;
+    line-height: 1.3 !important;
+    margin-bottom: 16px !important;
+    text-align: center !important;
+    width: 100% !important;
+  }
+  
+  div[class*="HeroSubtitle"] {
+    font-size: 16px !important;
+    line-height: 1.4 !important;
+    margin-bottom: 24px !important;
+    text-align: center !important;
+    width: 100% !important;
+  }
+  
+  /* Bottom tagline centering - target all text in hero section */
+  div[class*="HeroSection"] * {
+    text-align: center !important;
+  }
+  
+  /* Force center for all elements in the hero section */
+  div[class*="HeroSection"] {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 100% !important;
+    padding: 0 !important;
+  }
+  
+  /* Bottom tagline specific centering */
+  div[class*="HeroSection"] > :last-child {
+    display: block !important;
+    text-align: center !important;
+    width: 100% !important;
+    margin: 20px auto 0 !important;
+    padding: 0 20px !important;
+    box-sizing: border-box !important;
+    position: relative !important;
+    left: 0 !important;
+  }
+  
+  /* Button adjustments */
+  button[class*="DeployButton"],
+  button[class*="ConnectButton"] {
+    padding: 12px 24px !important;
+    font-size: 16px !important;
+    width: 100% !important;
+    max-width: 280px !important;
+    margin: 0 auto !important;
+    display: block !important;
+    position: relative !important;
+    left: 0 !important;
+    right: 0 !important;
+  }
+  
+  /* Form field adjustments */
+  div[class*="ArnInput"] {
+    width: 100% !important;
+    max-width: 320px !important;
+    box-sizing: border-box !important;
+    overflow: hidden !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    left: 0 !important;
+    right: 0 !important;
+    position: relative !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+  }
+  
+  div[class*="ArnInput"] input,
+  div[class*="ArnInput"] select {
+    font-size: 16px !important; /* Prevents iOS zoom on focus */
+    padding: 10px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+    max-width: 100% !important;
+    text-align: center !important;
+  }
+  
+  /* Fix for all form elements to prevent overflow */
+  input, select, textarea, button {
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+  
+  /* Fix for separator lines */
+  div[class*="Separator"] {
+    width: 100% !important;
+    max-width: 320px !important;
+    box-sizing: border-box !important;
+    overflow: hidden !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    left: 0 !important;
+    right: 0 !important;
+    position: relative !important;
+  }
+  
+  /* Config page adjustments */
+  div[class*="ConfigSection"],
+  div[class*="ConfigContainer"] {
+    padding: 20px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+    margin: 0 auto !important;
+    position: relative !important;
+    left: 0 !important;
+    right: 0 !important;
+  }
+  
+  /* Force all config content to center */
+  div[class*="ConfigSection"] > *,
+  div[class*="ConfigContainer"] > * {
+    margin-left: auto !important;
+    margin-right: auto !important;
+    text-align: center !important;
+    position: relative !important;
+    left: 0 !important;
+    right: 0 !important;
+  }
+  
+  /* Specific fixes for form labels and inputs */
+  div[class*="InputLabel"],
+  div[class*="InputField"],
+  div[class*="FormField"],
+  div[class*="FormLabel"] {
+    text-align: center !important;
+    width: 100% !important;
+    max-width: 320px !important;
+    margin: 0 auto !important;
+    display: block !important;
+    position: relative !important;
+    left: 0 !important;
+    right: 0 !important;
+  }
+  
+  /* Fix for input placeholders */
+  input::placeholder {
+    text-align: center !important;
+  }
+  
+  /* Fix for the deploy role button */
+  a[href*="cloudformation"],
+  button[class*="CloudFormation"] {
+    display: block !important;
+    margin: 20px auto !important;
+    position: relative !important;
+    left: 0 !important;
+    right: 0 !important;
+    text-align: center !important;
+  }
+  
+  /* ===== CHAT INTERFACE ===== */
+  
+  /* Header adjustments */
+  div[class*="Header"] {
+    padding: 1rem 0 !important;
+    width: 100% !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+  
+  /* Chat container centering */
+  div[class*="TerminalContainer"] {
+    width: 100% !important;
+    max-width: 100% !important;
+    padding: 0 5% !important;
+    box-sizing: border-box !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    overflow-x: hidden !important;
+    margin: 0 auto !important;
+  }
+  
+  /* Messages container centering */
+  div[class*="MessagesContainer"] {
+    width: 100% !important;
+    max-width: 100% !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    text-align: center !important;
+    overflow-x: hidden !important;
+  }
+  
+  /* Messages container */
+  div[class*="MessagesContainer"] {
+    padding: 0 !important;
+    margin-bottom: 1rem !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+    text-align: center !important;
+  }
+  
+  /* Message bubbles */
+  div[class*="UserMessage"],
+  div[class*="AssistantMessage"] {
+    max-width: 90% !important;
+    padding: 10px 12px !important;
+    font-size: 14px !important;
+    margin-bottom: 10px !important;
+    border-radius: 12px !important;
+  }
+  
+  /* User and assistant messages */
+  div[class*="UserMessage"],
+  div[class*="AssistantMessage"] {
+    padding: 10px 15px !important;
+    margin-bottom: 8px !important;
+    font-size: 14px !important;
+    line-height: 1.4 !important;
+    max-width: 100% !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+    text-align: center !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    position: relative !important;
+    left: 0 !important;
+    right: 0 !important;
+  }
+  
+  /* Input area */
+  div[class*="InputContainer"] {
+    padding: 10px !important;
+    position: fixed !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    background-color: #000000 !important;
+    z-index: 10 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+  
+  /* Input form */
+  div[class*="InputContainer"] form {
+    width: 100% !important;
+    max-width: 100% !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    position: relative !important;
+    box-sizing: border-box !important;
+  }
+  
+  /* Prompt and input field */
+  span[class*="Prompt"],
+  div[class*="InputContainer"] input {
+    text-align: center !important;
+    margin: 0 auto !important;
+  }
+  
+  /* Input field */
+  div[class*="StyledTextField"] {
+    font-size: 16px !important;
+  }
+  
+  /* Command prompt */
+  span[class*="Prompt"] {
+    font-size: 14px !important;
+    padding-right: 5px !important;
+  }
+  
+  /* Send button */
+  button[class*="CommandButton"] {
+    padding: 6px !important;
+    min-width: 36px !important;
+    height: 36px !important;
+  }
+  
+  /* ===== SIDEBAR ===== */
+  
+  /* Sidebar container */
+  div[class*="Sidebar"] {
+    width: 100% !important;
+    position: fixed !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    height: auto !important;
+    z-index: 100 !important;
+    display: flex !important;
+    justify-content: space-around !important;
+    padding: 8px 0 !important;
+    background-color: #121212 !important;
+    border-top: 1px solid rgba(255, 255, 255, 0.1) !important;
+  }
+  
+  /* Sidebar items */
+  div[class*="Sidebar"] button {
+    padding: 8px !important;
+    min-width: auto !important;
+    margin: 0 5px !important;
+  }
+  
+  /* Sidebar icons */
+  div[class*="Sidebar"] svg {
+    width: 20px !important;
+    height: 20px !important;
+  }
+  
+  /* Hide sidebar labels on mobile */
+  div[class*="Sidebar"] span {
+    display: none !important;
+  }
+  
+  /* Main content area adjustment */
+  div[class*="TerminalContainer"] {
+    margin-left: 0 !important;
+    margin-bottom: 60px !important; /* Height of bottom sidebar */
+    width: 100% !important;
+    padding: 0 !important;
+  }
+  
+  /* ===== DEPLOYMENTS PAGE ===== */
+  
+  /* Deployments wrapper */
+  div[id="deployments-wrapper"] {
+    margin-left: 0 !important;
+    padding: 10px !important;
+    width: 100% !important;
+    margin-bottom: 60px !important; /* Space for bottom sidebar */
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    box-sizing: border-box !important;
+  }
+  
+  /* Page container for deployments */
+  div[class*="PageContainer"] {
+    padding: 1rem !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    overflow-x: hidden !important;
+  }
+  
+  /* Page header for deployments */
+  div[class*="PageHeader"] {
+    width: 100% !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    margin-bottom: 1.5rem !important;
+    padding: 0 !important;
+    text-align: center !important;
+    position: relative !important;
+  }
+  
+  /* Page title for deployments */
+  div[class*="PageTitle"],
+  span[class*="PageTitle"] {
+    font-size: 1.8rem !important;
+    text-align: center !important;
+    margin: 1rem auto !important;
+    width: 100% !important;
+    display: block !important;
+  }
+  
+  /* Deployments container */
+  div[class*="DeploymentsContainer"] {
+    padding: 10px !important;
+    width: 100% !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+  }
+  
+  /* Deployments header */
+  div[class*="DeploymentsHeader"] h1,
+  div[class*="DeploymentsPage"] h1 {
+    font-size: 24px !important;
+    margin-bottom: 15px !important;
+    text-align: center !important;
+    width: 100% !important;
+  }
+  
+  /* Sort controls */
+  div:has(> span:contains("SORT BY")),
+  div[class*="SortControls"] {
+    width: 100% !important;
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: center !important;
+    margin: 0.5rem auto 1rem !important;
+    text-align: center !important;
+  }
+  
+  /* Deployment card adjustments */
+  div[class*="DeploymentCard"] {
+    padding: 15px !important;
+    margin-bottom: 15px !important;
+    width: 90% !important; /* Slightly narrower for better mobile appearance */
+    max-width: 450px !important;
+    box-sizing: border-box !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    text-align: center !important;
+    border-radius: 8px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+  
+  div[class*="DeploymentCard"] h3 {
+    font-size: 18px !important;
+    margin-bottom: 5px !important;
+    text-align: center !important;
+    width: 100% !important;
+  }
+  
+  div[class*="DeploymentCard"] p {
+    font-size: 14px !important;
+    margin-bottom: 5px !important;
+    text-align: center !important;
+    width: 100% !important;
+  }
+  
+  /* Instance ID */
+  span[class*="InstanceId"],
+  div[class*="InstanceId"] {
+    width: 100% !important;
+    text-align: center !important;
+    display: block !important;
+    margin: 0 auto !important;
+    word-break: break-all !important;
+  }
+  
+  /* Status badge */
+  span[class*="StatusBadge"] {
+    margin: 0.5rem auto !important;
+    display: inline-block !important;
+  }
+  
+  /* Instance details and tags */
+  div[class*="InstanceDetails"],
+  div[class*="InstanceInfo"],
+  div[class*="InstanceTags"],
+  div:has(> span[class*="InstanceType"]) {
+    width: 100% !important;
+    display: flex !important;
+    flex-wrap: wrap !important;
+    justify-content: center !important;
+    gap: 0.5rem !important;
+    margin: 0.5rem auto !important;
+  }
+  
+  /* Instance type tags */
+  span[class*="InstanceType"],
+  span[class*="RegionTag"],
+  span[class*="IpTag"] {
+    margin: 0.25rem !important;
+    padding: 4px 10px !important;
+    font-size: 12px !important;
+    border-radius: 12px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+  
+  /* Action buttons container */
+  div[class*="ActionButtons"] {
+    width: 100% !important;
+    display: flex !important;
+    justify-content: center !important;
+    margin: 0.5rem auto !important;
+    flex-wrap: wrap !important;
+  }
+  
+  /* Card buttons */
+  div[class*="DeploymentCard"] button,
+  div[class*="ActionButtons"] button {
+    padding: 10px 14px !important;
+    font-size: 13px !important;
+    margin: 4px !important;
+    min-width: 40px !important;
+    min-height: 40px !important; /* Better touch target size */
+    border-radius: 4px !important;
+  }
+  
+  /* Action icons */
+  div[class*="ActionButtons"] svg {
+    font-size: 18px !important;
+  }
+  
+  /* Refresh button */
+  button:has(> span:contains("Refresh")),
+  button[class*="RefreshButton"] {
+    margin: 1rem auto !important;
+    display: block !important;
+    text-align: center !important;
+    width: 90% !important;
+    max-width: 320px !important;
+    padding: 12px !important;
+    font-size: 14px !important;
+  }
+  
+  /* Back button */
+  button[class*="BackButton"] {
+    position: fixed !important;
+    top: 10px !important;
+    left: 10px !important;
+    z-index: 10 !important;
+    padding: 6px 12px !important;
+    font-size: 14px !important;
+  }
+}
+
+/* iPhone-specific adjustments */
+@media (max-width: 390px) {
+  img[alt="Ghosted Logo"] {
+    max-width: 80px !important;
+  }
+  
+  div[class*="WordmarkContainer"] span {
+    font-size: 42px !important;
+  }
+  
+  div[class*="HeroTitle"] {
+    font-size: 22px !important;
+  }
+  
+  div[class*="HeroSubtitle"] {
+    font-size: 14px !important;
+  }
+  
+  /* Even smaller chat text for iPhone */
+  div[class*="UserMessage"],
+  div[class*="AssistantMessage"] {
+    font-size: 13px !important;
+    padding: 8px 10px !important;
+  }
+  
+  /* Input field */
+  div[class*="InputContainer"] input,
+  div[class*="StyledTextField"],
+  input[class*="MuiInputBase-input"] {
+    font-size: 16px !important; /* Minimum 16px to prevent iOS zoom */
+    padding: 8px 10px !important;
+    text-align: left !important; /* Keep text left-aligned in input */
+    -webkit-appearance: none !important; /* Prevent iOS styling */
+    appearance: none !important; /* Standard property for compatibility */
+    border-radius: 0 !important; /* Prevent iOS styling */
+  }
+  
+  /* Prevent zoom on focus */
+  input:focus,
+  textarea:focus,
+  select:focus {
+    font-size: 16px !important;
+    transform: scale(1) !important;
+  }
+  
+  /* Tighter input area */
+  div[class*="InputContainer"] {
+    padding: 8px !important;
+  }
+  
+  /* Smaller deployment cards */
+  div[class*="DeploymentCard"] {
+    padding: 10px !important;
+  }
+}
